@@ -34,6 +34,10 @@ func getRequest(character map[string]string) string {
 	if ok {
 		request.WriteString("name=" + character["name"] + "&")
 	}
+	_, ok = character["orderBy"]
+	if ok {
+		request.WriteString("orderBy=" + character["orderBy"] + "&")
+	}
 	_, ok = character["limit"]
 	if ok {
 		request.WriteString("limit=" + character["limit"] + "&")
@@ -91,8 +95,10 @@ func main() {
 		case 2:
 			{
 				param["limit"] = "20"
+				param["orderBy"] = "name"
 				fmt.Println(getCharacters(param))
 				delete(param, "limit")
+				delete(param, "orderBy")
 				fmt.Println("Enter para seguir...")
 				fmt.Scanln()
 			}
